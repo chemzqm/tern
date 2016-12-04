@@ -19,9 +19,9 @@
         outObj.originNode = file.ast
         out.addType(outObj)
       }
-      var prop = outObj.defProp(prop, originNode)
-      prop.origin = file.name
-      type.propagate(prop)
+      var p = outObj.defProp(prop, originNode)
+      p.origin = file.name
+      type.propagate(p)
     }
 
     walk.simple(file.ast, {
@@ -65,8 +65,8 @@
         }
         if (node.specifiers.length) {
           var src = node.source ? modules.resolveModule(node.source.value, file.name) : file.scope
-          for (var i = 0; i < node.specifiers.length; i++) {
-            var spec = node.specifiers[i]
+          for (var j = 0; j < node.specifiers.length; j++) {
+            var spec = node.specifiers[j]
             exp(spec.exported.name, src.getProp(spec.local.name), spec.local)
           }
         }
