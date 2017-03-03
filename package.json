@@ -14,7 +14,7 @@
     "test": "node ./bin/test"
   },
   "dependencies": {
-    "acorn": "^4.0.11",
+    "acorn": "^4.0.3",
     "acorn-jsx": "github:chemzqm/acorn-jsx",
     "enhanced-resolve": "^2.3.0",
     "glob": "^7.1.1",
