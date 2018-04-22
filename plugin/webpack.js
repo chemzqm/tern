@@ -8,21 +8,24 @@ require("./es_modules");
 
 function isArray(v) {
   return Object.prototype.toString.call(v) == "[object Array]";
-};
+}
 
 var fs = require('fs');
 var path = require("path");
-var ResolverFactory = require("enhanced-resolve").ResolverFactory;
-var SyncNodeJsInputFileSystem = require("enhanced-resolve/lib/SyncNodeJsInputFileSystem");
+var enhancedResolve = require("enhanced-resolve")
+var ResolverFactory = enhancedResolve.ResolverFactory;
+var NodeJsInputFileSystem = enhancedResolve.NodeJsInputFileSystem
+var CachedInputFileSystem = enhancedResolve.CachedInputFileSystem
 
 function getResolver(modules, configPath) {
   var config = {
+    alias: [],
     unsafeCache: true,
     modules: modules || ["node_modules"],
     extensions: [".js", ".jsx", ".json"],
     aliasFields: ["browser"],
     mainFields: ["browser", "web", "browserify", "main"],
-    fileSystem: new SyncNodeJsInputFileSystem()
+    fileSystem: new CachedInputFileSystem(new NodeJsInputFileSystem(), 4000)
   }
   var webpackConfig = (configPath && fs.existsSync(configPath)) ? require(configPath) : null
   if (typeof webpackConfig === 'function') {
@@ -47,8 +50,6 @@ function getResolver(modules, configPath) {
         } else {
           config.modules.push(fallback)
         }
-      } else if (key === 'modules') {
-        config.modules = config.modules.concat(resolveConfig[key])
       } else {
         config[key] = resolveConfig[key]
       }

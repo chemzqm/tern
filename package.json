@@ -14,12 +14,12 @@
     "test": "node ./bin/test"
   },
   "dependencies": {
-    "acorn": "^4.0.3",
+    "acorn": "^5.5.3",
     "acorn-jsx": "github:chemzqm/acorn-jsx",
-    "enhanced-resolve": "^2.3.0",
-    "glob": "^7.1.1",
-    "minimatch": "^3.0.3",
-    "resolve-from": "2.0.0"
+    "enhanced-resolve": "^4.0.0",
+    "glob": "^7.1.2",
+    "minimatch": "^3.0.4",
+    "resolve-from": "4.0.0"
   },
   "devDependencies": {
     "codemirror": "git://github.com/codemirror/CodeMirror.git"
